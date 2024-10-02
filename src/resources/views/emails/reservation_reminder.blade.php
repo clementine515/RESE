@@ -1,0 +1,2 @@
+<p>{{ $reservation->user->name }} 様,</p>
+<p>本日（{{ $reservation->reservation_date  }}）は {{ $restaurant_name }} のご来店日です。</br>ご予約時間は {{ $reservation->reservation_time }}、ご予約人数は {{ $reservation->guest_count }} 名様です。</br>どうぞお気をつけてご来店ください。</p>

@@ -1,0 +1,229 @@
+.card {
+    border: 1px solid #ddd;
+    overflow: hidden;
+    box-shadow: 4px 4px rgb(190, 187, 187);
+    border-radius: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-img-top {
+    height: 130px;
+    object-fit: cover;
+}
+
+.btn-heart {
+    background: none;
+    border: none;
+    color: gray;
+    font-size: 25px;
+    cursor: pointer;
+    float: right;
+}
+
+.btn-heart.heart-liked {
+    color: red;
+}
+
+.card-title{
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.card-text{
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.btn-primary{
+    border: 1px solid rgba(0, 55, 255, 0.962);
+    background-color: rgba(0, 55, 255, 0.962);
+    color: #FFF;
+    border-radius: 5px;
+    font-size: 12px;
+    padding:5px 10px;
+}
+
+.card-body{
+    padding: 10px 20px;
+}
+
+.header-nav__button{
+    color: rgba(0, 55, 255, 0.962);
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#overlay-button {
+    border: 1px solid rgba(0, 55, 255, 0.962);
+    background-color: rgba(0, 55, 255, 0.962);
+    color: #FFF;
+    padding: 5px 10px 10px;
+    font-size: 8px;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    line-height: 1em;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 5px;
+}
+
+#close-button {
+    border: 1px solid rgba(0, 55, 255, 0.962);
+    background-color: rgba(0, 55, 255, 0.962);
+    color: #FFF;
+    padding: 10px 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    line-height: 1em;
+    position: absolute;
+    left: 2em;
+    top: 3em;
+    z-index: 5;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 5px;
+}
+
+#overlay-button:hover {
+    background-color: #ddd;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox]:checked~#overlay {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+    animation: overlayFadeIn 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+input[type=checkbox]:checked~#overlay-button {
+    display: none;
+}
+
+input[type=checkbox]:checked~#overlay #close-button {
+    display: block;
+}
+
+#overlay {
+    background-color: #FFF;
+    height: 100vh;
+    width: 100vw;
+    z-index: 2;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: scale(0);
+}
+
+#overlay ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100vh;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+#overlay ul li {
+    padding: 1em;
+    color: rgba(0, 55, 255, 0.962);
+}
+
+#overlay ul li a {
+    color: rgba(0, 55, 255, 0.962);
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.search-form{
+    display: flex;
+    border: 1px solid white;
+    width:50%;
+    box-shadow: 4px 4px rgb(190, 187, 187);
+    border-radius: 5px;
+    background-color: white;
+    justify-content: space-between;
+    position: absolute;
+    top: 15px;
+    right: 50px;
+    padding: 5px;
+}
+
+.search-form__genre-select,
+.search-form__area-select,
+.search-form__word{
+    color:gray;
+    padding: 10px;
+}
+
+.search-form__actions{
+    border: 1px solid rgba(0, 55, 255, 0.962);
+    background-color: rgba(0, 55, 255, 0.962);
+    border-radius: 5px;
+}
+
+.search-form__search-btn{
+    color: #FFF;
+}
+
+.col-md-3 {
+    width: 25%;
+    float: left;
+    padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .col-md-3 {
+        width: 50%;
+        padding: 10px;
+        }
+
+    .search-form {
+        width: 80%;
+        font-size: 10px;
+        position: absolute;
+        top: 60px;
+        right: 70px;
+    }
+
+    .card-img-top {
+        height: 120px;
+    }
+
+    .card-text{
+        font-size: 11px;
+    }
+
+    .btn-primary{
+        font-size: 11px;
+    }
+}

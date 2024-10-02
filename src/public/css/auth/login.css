@@ -1,0 +1,166 @@
+.login-form{
+    width:33%;
+    border:1px solid #FFF;
+    background-color: #FFF;
+    color:black;
+    text-align: left;
+    margin:0 auto;
+    box-shadow:  4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.login-form__title{
+    color:white;
+    background-color: rgba(0, 55, 255, 0.962);
+    font-weight: lighter;
+    font-size: 13px;
+    padding:10px 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+.login-form__input{
+    margin-left: 5px;
+    border-bottom: 1px solid black;
+    font-size: 13px;
+    width:70%;
+}
+
+.login-form__group{
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #FFF;
+    position: relative;
+}
+
+.login-form__button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 5px 5px;
+    background-color: rgba(0, 55, 255, 0.962);
+    color: #FFF;
+    font-size: 13px;
+    cursor: pointer;
+    width: 20%;
+    border: 1px solid rgba(0, 55, 255, 0.962);
+    border-radius: 5px;
+    margin-right:50px;
+}
+
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#overlay-button{
+    border: 1px solid rgba(0, 55, 255, 0.962);
+    background-color: rgba(0, 55, 255, 0.962);
+    color: #FFF;
+    padding: 5px 10px 10px;
+    font-size: 8px;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    line-height: 1em;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 5px;
+}
+
+#close-button {
+    border: 1px solid rgba(0, 55, 255, 0.962);
+    background-color: rgba(0, 55, 255, 0.962);
+    color: #FFF;
+    padding: 10px 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    line-height: 1em;
+    position: absolute;
+    left: 2em;
+    top: 3em;
+    z-index: 5;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 5px;
+}
+
+#overlay-button:hover {
+    background-color: #ddd;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox]:checked~#overlay {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+    animation: overlayFadeIn 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+input[type=checkbox]:checked~#overlay-button {
+    display: none;
+}
+
+input[type=checkbox]:checked~#overlay #close-button {
+    display: block;
+}
+
+#overlay {
+    background-color: #FFF;
+    height: 100vh;
+    width: 100vw;
+    z-index: 2;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: scale(0);
+}
+
+#overlay ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100vh;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+#overlay ul li {
+    padding: 1em;
+    color: rgba(0, 55, 255, 0.962);
+}
+
+#overlay ul li a {
+    color:rgba(0, 55, 255, 0.962);
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+@media screen and (max-width: 768px) {
+    .login-form{
+        width:70%;
+    }
+}

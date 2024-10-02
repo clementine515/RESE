@@ -1,0 +1,244 @@
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.header-nav__button {
+    color: rgba(0, 55, 255, 0.962);
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#overlay-button {
+    border: 1px solid rgba(0, 55, 255, 0.962);
+    background-color: rgba(0, 55, 255, 0.962);
+    color: #FFF;
+    padding: 5px 10px 10px;
+    font-size: 8px;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    line-height: 1em;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 5px;
+}
+
+#close-button {
+    border: 1px solid rgba(0, 55, 255, 0.962);
+    background-color: rgba(0, 55, 255, 0.962);
+    color: #FFF;
+    padding: 10px 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    line-height: 1em;
+    position: absolute;
+    left: 2em;
+    top: 3em;
+    z-index: 5;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 5px;
+}
+
+#overlay-button:hover {
+    background-color: #ddd;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox]:checked~#overlay {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+    animation: overlayFadeIn 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+input[type=checkbox]:checked~#overlay-button {
+    display: none;
+}
+
+input[type=checkbox]:checked~#overlay #close-button {
+    display: block;
+}
+
+#overlay {
+    background-color: #FFF;
+    height: 100vh;
+    width: 100vw;
+    z-index: 2;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: scale(0);
+}
+
+#overlay ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100vh;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+#overlay ul li {
+    padding: 1em;
+    color: rgba(0, 55, 255, 0.962);
+}
+
+#overlay ul li a {
+    color: rgba(0, 55, 255, 0.962);
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.shop-detail{
+    display: flex;
+}
+
+.restaurant{
+    width:50%;
+    padding: 0 50px;
+}
+
+.restaurant-name{
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.restaurant-top{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn-back{
+    background-color: #FFF;
+    color:black;
+    border: 1px solid #FFF;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+    font-size: 15px;
+    padding: 5px 10px;
+}
+
+.restaurant-text{
+    font-size: 12px;
+}
+
+.reservation-form{
+    border: 1px solid rgb(58, 97, 237);
+    background-color: rgb(58, 97, 237);
+    border-radius: 5px;
+    width: 40%;
+    margin: 0 auto;
+    box-shadow: 4px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    height: auto;
+}
+
+.form-top{
+    color: #FFF;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 50px;
+}
+
+.reservation-summary__date{
+    width:40%;
+    display: block;
+}
+
+.item{
+    font-size: 15px;
+}
+
+.reservation-summary__item{
+    border: 1px solid white;
+    background-color: #FFF;
+    border-radius: 5px;
+    padding-left:10px;
+    margin-left:50px;
+    margin-right: 50px;
+}
+
+.reservation-check{
+    border:1px solid rgb(36, 139, 229);
+    background-color: rgb(36, 139, 229);
+    color:white;
+    border-radius: 5px;
+    padding-top:20px;
+    padding-left: 10px;
+    line-height: 0.5em;
+    margin-left: 50px;
+    margin-right: 50px;
+    overflow-y: auto;
+}
+
+.btn-reservation{
+    width: 100%;
+    color:white;
+    border: 1px solid rgba(0, 55, 255, 0.962);
+    border-radius: 0;
+    background-color: rgba(0, 55, 255, 0.962);
+    padding:15px 0;
+    position: absolute;
+    bottom:0;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 768px){
+    .shop-detail{
+        display: block;
+    }
+
+    .restaurant{
+        width:100%;
+    }
+
+    .reservation-form{
+        width:80%;
+        height:auto;
+    }
+
+    .reservation-check {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .btn-reservation {
+        position: relative;
+        bottom: auto;
+        }
+}
+
