@@ -3,7 +3,7 @@
 ユーザーが飲食店を検索し、予約やお気に入り登録ができるシステムです。<br>
 管理者と店舗代表者もそれぞれの権限で飲食店情報を管理できます。 
 Laravelを使用し、Dockerコンテナで開発環境を構築しています。
-Stripeによる決済機能やmailtrapを使用したメール認証、
+Stripeによる決済機能やMailtrapを使用したメール認証・送信、
 QRコード生成など、様々な機能を追加実装しています。
 <img width="1456" alt="上級案件トップページ" src="https://github.com/user-attachments/assets/9fa405de-2171-4841-b328-bd57afd05fbe">
 
