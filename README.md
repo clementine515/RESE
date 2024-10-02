@@ -32,7 +32,7 @@ Name：磯野サザエ<br>
 Email：becace1869@tiervio.com<br>
 Password：12345678<br>
 
-＜管理者(role:adimn)＞<br>
+＜管理者(role:admin)＞<br>
 Name：Admin Name<br>
 Email：admin@example.com<br>
 Password：password<br>
