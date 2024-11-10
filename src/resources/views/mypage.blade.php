@@ -79,8 +79,4 @@
         </div>
     </div>
 </div>
-
-<div class="visit-history-link">
-    <a href="{{ route('visit-history') }}" class="btn btn-showhistory">来店履歴はこちら</a>
-</div>
 @endsection('content')

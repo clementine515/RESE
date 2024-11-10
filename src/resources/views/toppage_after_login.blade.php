@@ -23,6 +23,15 @@
 @endsection('menu-btn')
 
 @section('content')
+<form class="sort-form" action="/search" method="get" id="sortForm">
+    <select name="sort_order" class="search-form__sort-select" onchange="document.getElementById('sortForm').submit();">
+        <option value="" {{ request('sort_order') == '' ? 'selected' : '' }}>並び替え：</option>
+        <option value="random" {{ request('sort_order') == 'random' ? 'selected' : '' }}>並び替え：ランダム</option>
+        <option value="high_rating" {{ request('sort_order') == 'high_rating' ? 'selected' : '' }}>並び替え：評価が高い順</option>
+        <option value="low_rating" {{ request('sort_order') == 'low_rating' ? 'selected' : '' }}>並び替え：評価が低い順</option>
+    </select>
+</form>
+
 <form class="search-form" action="/search" method="get">
     @csrf
     <div class="search-form__area">

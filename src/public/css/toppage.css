@@ -178,6 +178,19 @@ input[type=checkbox]:checked~#overlay #close-button {
     padding: 5px;
 }
 
+.sort-form{
+    border: 1px solid white;
+    width: 15%;
+    box-shadow: 4px 4px rgb(190, 187, 187);
+    border-radius: 5px;
+    background-color: white;
+    position: absolute;
+    top: 25px;
+    left: 400px;
+    padding: 10px;
+    font-size: 15px;
+}
+
 .search-form__genre-select,
 .search-form__area-select,
 .search-form__word{
@@ -208,11 +221,18 @@ input[type=checkbox]:checked~#overlay #close-button {
         }
 
     .search-form {
-        width: 80%;
+        width: 70%;
         font-size: 10px;
         position: absolute;
         top: 60px;
-        right: 70px;
+        right: 15px;
+    }
+
+    .sort-form{
+        position: absolute;
+        top: 60px;
+        left: 15px;
+        width:25%;
     }
 
     .card-img-top {
@@ -226,4 +246,5 @@ input[type=checkbox]:checked~#overlay #close-button {
     .btn-primary{
         font-size: 11px;
     }
+
 }

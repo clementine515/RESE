@@ -10,12 +10,11 @@ class Area extends Model
     use HasFactory;
 
     protected $table = 'areas';
+    protected $fillable = ['area_name'];
 
     protected $guarded = [
         'id',
     ];
-
-    protected $fillable =  ['name'];
 
     public function restaurants()
     {

@@ -3,27 +3,83 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Review;
+use App\Models\NewReview;
+use App\Models\Restaurant;
+
 
 class ReviewController extends Controller
 {
     public function store(Request $request)
     {
         $request->validate([
-            'reservation_id' => 'required|exists:reservations,id',
             'restaurant_id' => 'required|exists:restaurants,id',
-            'star' => 'required|integer|min:1|max:5',
-            'comment' => 'nullable|string',
+            'comment' => 'nullable|max:400',
+            'photo' => 'nullable|image|mimes:jpeg,png|max:2048',
         ]);
 
-        Review::create([
+
+        $imagePath = null;
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('reviews', 'public');
+        }
+
+
+        NewReview::create([
             'user_id' => auth()->id(),
-            'reservation_id' => $request->input('reservation_id'),
             'restaurant_id' => $request->input('restaurant_id'),
-            'star' => $request->input('star'),
+            'star' => !is_null($request->input('star')) ? $request->input('star') : 5,
             'comment' => $request->input('comment'),
+            'photo' => $imagePath,
         ]);
 
-        return redirect()->route('visit-history');
+        return redirect()->route('mypage');
     }
+
+    public function edit($id)
+    {
+        $review = NewReview::findOrFail($id);
+        $restaurant = $review->restaurant;
+        return view('review_form', compact('review', 'restaurant'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'comment' => 'nullable|max:400',
+            'photo' => 'nullable|image|mimes:jpeg,png|max:2048',
+        ]);
+
+        $review = NewReview::findOrFail($id);
+
+        if ($request->hasFile('photo')) {
+            $imagePath = $request->file('photo')->store('reviews', 'public');
+            $review->photo = $imagePath;
+        }
+
+        $review->update([
+            'star' => $request->input('star', $review->star),
+            'comment' => $request->input('comment', $review->comment),
+        ]);
+
+        return redirect()->route('shop_detail', ['shop_id' => $review->restaurant_id])
+                        ->with('success', '口コミが更新されました');
+    }
+
+    public function destroy($id)
+    {
+        $review = NewReview::findOrFail($id);
+        $review->delete();
+
+        return redirect()->route('shop_detail', ['shop_id' => $review->restaurant_id])
+                        ->with('success', '口コミが削除されました');
+    }
+
+    public function showAllReviews($restaurant_id)
+    {
+        $reviews = NewReview::where('restaurant_id', $restaurant_id)->get();
+        $restaurant = Restaurant::findOrFail($restaurant_id);
+
+        return view('all_reviews', compact('reviews', 'restaurant'));
+    }
+
 }

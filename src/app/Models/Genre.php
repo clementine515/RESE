@@ -10,12 +10,11 @@ class Genre extends Model
     use HasFactory;
 
     protected $table = 'genres';
+    protected $fillable = ['genre_name'];
 
     protected $guarded = [
         'id',
     ];
-
-    protected $fillable = ['name'];
 
     public function restaurants()
     {

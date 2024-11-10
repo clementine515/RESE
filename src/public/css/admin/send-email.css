@@ -26,6 +26,10 @@
     margin-top: 10px;
 }
 
+.send-email {
+    padding: 0 100px;
+}
+
 @media screen and (max-width: 768px) {
     .btn-back {
         width: 20%;

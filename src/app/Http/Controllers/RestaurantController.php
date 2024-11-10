@@ -7,10 +7,12 @@ use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Like;
 use App\Models\Restaurant;
+use App\Models\NewReview;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 
 class RestaurantController extends Controller
 {
@@ -30,8 +32,16 @@ class RestaurantController extends Controller
 
     public function show($shop_id)
     {
-        $restaurant = Restaurant::findOrFail($shop_id);
-        return view('shop_detail', compact('restaurant'));
+        $restaurant = Restaurant::with(['area', 'genre'])->findOrFail($shop_id);
+        $userReview = null;
+
+        if (Auth::check()) {
+            $userReview = NewReview::where('user_id', Auth::id())
+                                ->where('restaurant_id', $shop_id)
+                                ->first();
+        }
+
+        return view('shop_detail', compact('restaurant', 'userReview'));
     }
 
     public function search(Request $request)
@@ -48,6 +58,20 @@ class RestaurantController extends Controller
 
         if ($request->filled('keyword')) {
             $query->where('restaurant_name', 'like', '%' . $request->keyword . '%');
+        }
+
+        if ($request->filled('sort_order')) {
+            if ($request->sort_order === 'high_rating') {
+                $query->withCount(['reviews as star_sum' => function ($query) {
+                    $query->select(DB::raw('SUM(star)'));
+                }])->orderByDesc('star_sum');
+            } elseif ($request->sort_order === 'low_rating') {
+                $query->withCount(['reviews as star_sum' => function ($query) {
+                    $query->select(DB::raw('SUM(star)'));
+                }])->orderBy('star_sum');
+            } elseif ($request->sort_order === 'random') {
+                $query->inRandomOrder();
+            }
         }
 
         $restaurants = $query->with(['area', 'genre'])->get();

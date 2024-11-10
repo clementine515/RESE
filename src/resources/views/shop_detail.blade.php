@@ -38,6 +38,39 @@
             {{ $restaurant->description }}
             </p>
         </div>
+        <div class="check-review">
+            <a href="{{ route('reviews.all', ['restaurant_id' => $restaurant->id]) }}" class="btn-checkreview">全ての口コミ情報</a>
+        </div>
+
+        @if ($userReview)
+        <div class="user-review">
+            <div class="review-actions">
+                <a href="{{ route('review.edit', ['id' => $userReview->id]) }}" class="btn-edit">口コミを編集</a>
+                <form action="{{ route('review.delete', ['id' => $userReview->id]) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn-delete" onclick="return confirm('本当に削除しますか？')">口コミを削除</button>
+                </form>
+            </div>
+
+            <p class="user-star">
+                @for ($i = 0; $i < $userReview->star; $i++)
+                    <i class="fa fa-star text-primary"></i>
+                @endfor
+                @for ($i = $userReview->star; $i < 5; $i++)
+                    <i class="fa fa-star text-secondary"></i>
+                @endfor
+            </p>
+            <p class="user-comment">{{ $userReview->comment }}</p>
+            @if ($userReview->photo)
+                <img src="{{ Storage::url($userReview->photo) }}" alt="クチコミ写真" class="review-photo">
+            @endif
+        </div>
+        @else
+        <div class="make-review">
+            <a href="{{ route('review-form', ['restaurant_id' => $restaurant->id]) }}" class="btn-review">口コミを投稿する</a>
+        </div>
+        @endif
     </div>
 
     <form class="reservation-form" action="{{ route('reservations.store') }}" method="POST">

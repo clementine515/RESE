@@ -33,10 +33,14 @@ Route::post('/email/verification-notification', [VerificationController::class, 
 
 Route::get('/', [RestaurantController::class, 'beforeLogin'])->name('toppage_before_login');
 
-Route::middleware('auth', 'verified')->group(function (){
+Route::middleware(['auth'])->group(function (){
     Route::get('/toppage_logged_in', [RestaurantController::class, 'index'])->name('toppage_logged_in');
-    Route::get('/detail/:{shop_id}', [RestaurantController::class, 'show'])->name('shop_detail');
+    Route::get('/detail/{shop_id}', [RestaurantController::class, 'show'])->name('shop_detail');
+    Route::middleware('admin')->group(function () {
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    });
 });
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
@@ -46,6 +50,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/send-email', [AdminController::class, 'showSendEmailForm'])->name('admin.sendEmailForm');
     Route::post('/admin/send-email', [AdminController::class, 'sendEmail'])->name('admin.sendEmail');
     Route::get('/admin/sent', [AdminController::class, 'sent'])->name('admin.sent');
+    Route::get('/admin/csv-import', [AdminController::class, 'showCsvImportForm'])->name('admin.csvImportForm');
+    Route::post('/admin/csv-import', [AdminController::class, 'importCsv'])->name('admin.importCsv');
+    Route::get('/toppage_after_login', [RestaurantController::class, 'index'])->name('toppage_after_login');
+    Route::get('/admin/review/{review_id}/destroy', [AdminController::class, 'destroyReview'])->name('admin.review.destroy');
 });
 
 Route::middleware(['auth', 'manager'])->group(function () {
@@ -104,7 +112,7 @@ Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->
 
 Route::post('/like/toggle', [RestaurantController::class, 'toggle'])->name('like.toggle');
 
-Route::get('/visit-history', [ReservationController::class, 'visitHistory'])->name('visit-history');
+Route::get('/review-form/{restaurant_id}', [ReservationController::class, 'showReviewForm'])->name('review-form');
 
 Route::get('/reservations/{id}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
 
@@ -112,6 +120,14 @@ Route::put('/reservations/{id}', [ReservationController::class, 'update'])->name
 
 Route::get('/reservations/{id}/qrcode', [ReservationController::class, 'generateQRCode'])->name('reservations.qrcode');
 
-Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
-
 Route::get('restaurants/{id}/save-image', [RestaurantController::class, 'saveImage'])->name('restaurants.saveImage');
+
+Route::post('/reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
+
+Route::get('/reviews/{id}/edit', [ReviewController::class, 'edit'])->name('review.edit');
+
+Route::put('/reviews/{id}', [ReviewController::class, 'update'])->name('review.update');
+
+Route::delete('/reviews/{id}', [ReviewController::class, 'destroy'])->name('review.delete');
+
+Route::get('/restaurants/{restaurant_id}/reviews', [ReviewController::class, 'showAllReviews'])->name('reviews.all');

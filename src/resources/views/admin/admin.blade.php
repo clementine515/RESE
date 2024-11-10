@@ -14,6 +14,8 @@
         <ul class="admin-list">
             <li class="admin-item"><a href="/admin/create-manager">店舗代表者を作成する</a></li>
             <li class="admin-item"><a href="/admin/send-email">メールを送る</a></li>
+            <li class="admin-item"><a href="{{ route('toppage_after_login') }}">口コミを管理する</a></li>
+            <li class="admin-item"><a href="{{ route('admin.csvImportForm') }}">新規店舗追加（csvインポート）</a></li>
             <li class="admin-item">
                 <form action="/logout" method="post">
                     @csrf
@@ -21,5 +23,6 @@
                 </form>
             </li>
         </ul>
+    </div>
 </div>
 @endsection('content')

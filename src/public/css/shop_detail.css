@@ -177,6 +177,7 @@ input[type=checkbox]:checked~#overlay #close-button {
 .reservation-summary__date{
     width:40%;
     display: block;
+    padding:5px 10px;
 }
 
 .item{
@@ -190,6 +191,7 @@ input[type=checkbox]:checked~#overlay #close-button {
     padding-left:10px;
     margin-left:50px;
     margin-right: 50px;
+    padding: 5px 10px;
 }
 
 .reservation-check{
@@ -197,8 +199,7 @@ input[type=checkbox]:checked~#overlay #close-button {
     background-color: rgb(36, 139, 229);
     color:white;
     border-radius: 5px;
-    padding-top:20px;
-    padding-left: 10px;
+    padding:30px 10px;
     line-height: 0.5em;
     margin-left: 50px;
     margin-right: 50px;
@@ -215,6 +216,57 @@ input[type=checkbox]:checked~#overlay #close-button {
     position: absolute;
     bottom:0;
     margin-top: 20px;
+}
+
+.btn-review{
+    color:black;
+    text-decoration: underline;
+}
+
+.btn-checkreview{
+    color: white;
+}
+
+.btn-edit,
+.btn-delete{
+    font-size: 12px;
+    color: black;
+    border-bottom: 1px solid black;
+    margin-right: 15px;
+}
+
+.review-actions{
+    text-align: right;
+}
+
+.check-review{
+    width:100%;
+    border: 1px solid rgb(36, 139, 229);
+    border-radius: 0;
+    background-color: rgb(36, 139, 229);
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+
+.user-review{
+    border-top:1px solid gray;
+    border-bottom: 1px solid gray;
+    margin-top:30px;
+    padding:20px 0;
+    margin-bottom:30px;
+}
+
+.user-comment{
+    font-size: 12px;
+}
+
+.user-star{
+    font-size: 20px;
+}
+
+.review-photo{
+    width:40%;
 }
 
 @media screen and (max-width: 768px){
@@ -240,5 +292,6 @@ input[type=checkbox]:checked~#overlay #close-button {
         position: relative;
         bottom: auto;
         }
+
 }
 

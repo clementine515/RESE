@@ -66,7 +66,19 @@ class ReservationController extends Controller
             ->whereRaw("TIMESTAMP(reservation_date, reservation_time) <= DATE_SUB(NOW(), INTERVAL 1 HOUR)")
             ->get();
 
-        return view('visit-history', compact('pastReservations'));
+        $restaurants = Restaurant::all();
+
+        return view('review_form', [
+            'reservation' => $pastReservations->first(),
+            'restaurants' => $restaurants,
+        ]);
+    }
+
+    public function showReviewForm($restaurant_id)
+    {
+        $restaurant = Restaurant::findOrFail($restaurant_id);
+
+        return view('review_form', compact('restaurant'));
     }
 
     public function edit($id)

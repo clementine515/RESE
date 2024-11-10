@@ -43,4 +43,9 @@ class Restaurant extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(NewReview::class, 'restaurant_id');
+    }
 }
