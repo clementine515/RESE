@@ -29,7 +29,7 @@
             <a href="{{ route('toppage_logged_in') }}" class="btn-back">＜</a>
             <p class="restaurant-name">{{ $restaurant->restaurant_name }}</p>
         </div>
-        <img src="{{ Storage::url($restaurant->photo_url) }}" class="card-img-top" alt="{{ $restaurant->restaurant_name }}">
+        <img src="{{ filter_var($restaurant->photo_url, FILTER_VALIDATE_URL) ? $restaurant->photo_url : Storage::url($restaurant->photo_url) }}" class="card-img-top" alt="{{ $restaurant->restaurant_name }}">
         <div class="restaurant-info">
             <p class="restaurant-text">
             <br>

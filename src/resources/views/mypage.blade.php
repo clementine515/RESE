@@ -54,7 +54,7 @@
         <div class="like-card">
             @foreach ($favoriteRestaurants as $restaurant)
                 <div class="card">
-                    <img src="{{ Storage::url($restaurant->photo_url) }}" class="card-img-top" alt="{{ $restaurant->restaurant_name }}">
+                    <img src="{{ filter_var($restaurant->photo_url, FILTER_VALIDATE_URL) ? $restaurant->photo_url : Storage::url($restaurant->photo_url) }}" class="card-img-top" alt="{{ $restaurant->restaurant_name }}">
                     <div class="card-body">
                         <h2 class="card-title">{{ $restaurant->restaurant_name }}</h2>
                         <p class="card-text">

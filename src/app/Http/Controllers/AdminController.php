@@ -127,6 +127,13 @@ class AdminController extends Controller
                     return redirect()->route('admin.csvImportForm')->with('error', 'CSVに不正なデータが含まれています。');
                 }
 
+                $validExtensions = ['jpeg', 'jpg', 'png'];
+                $fileExtension = pathinfo($row['画像URL'], PATHINFO_EXTENSION);
+
+                if (!in_array(strtolower($fileExtension), $validExtensions)) {
+                    return redirect()->route('admin.csvImportForm')->with('error', 'jpegまたはpngのみアップロード可能です！');
+                }
+
                 $area_id = \App\Models\Area::where('area_name', $row['地域'])->first()->id ?? null;
                 $genre_id = \App\Models\Genre::where('genre_name', $row['ジャンル'])->first()->id ?? null;
 

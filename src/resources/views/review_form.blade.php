@@ -27,7 +27,7 @@
     <div class="review-restaurant">
         <h1 class="title">今回のご利用はいかがでしたか？</h1>
         <div class="card">
-            <img src="{{ Storage::url($restaurant->photo_url) }}" class="card-img-top" alt="{{ $restaurant->restaurant_name }}">
+            <img src="{{ filter_var($restaurant->photo_url, FILTER_VALIDATE_URL) ? $restaurant->photo_url : Storage::url($restaurant->photo_url) }}" class="card-img-top" alt="{{ $restaurant->restaurant_name }}">
             <div class="card-body">
                 <div class="card-title">{{ $restaurant->restaurant_name }}</div>
                 <p class="card-text">
@@ -76,55 +76,10 @@
                 <input type="file" name="photo">
             </div>
             @if ($errors->has('photo'))
-                <p class="error-message" style="color: red;">* jpegまたはpng形式のみアップロード可能です。 </p>
+                <p class="error-message" style="color: red;">{{ $errors->first('photo') }}</p>
             @endif
 
             <button type="submit" class="btn-submit">口コミを投稿</button>
-
-            <!-- <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const uploadBox = document.getElementById('uploadBox');
-                const fileInput = document.getElementById('fileInput');
-                const errorMessage = document.getElementById('errorMessage');
-
-                uploadBox.addEventListener('click', () => {
-                    fileInput.click();
-                });
-
-                fileInput.addEventListener('change', handleFile);
-
-                uploadBox.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    uploadBox.classList.add('drag-over');
-                });
-
-                uploadBox.addEventListener('dragleave', () => {
-                    uploadBox.classList.remove('drag-over');
-                });
-
-                uploadBox.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    uploadBox.classList.remove('drag-over');
-                    const files = e.dataTransfer.files;
-                    if (files.length) {
-                        fileInput.files = files;
-                        handleFile();
-                    }
-                });
-
-                function handleFile() {
-                    const file = fileInput.files[0];
-                    if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
-                        errorMessage.style.display = 'none';
-                        uploadBox.innerHTML = `<p>${file.name} が選択されました</p>`;
-                    } else {
-                        fileInput.value = '';
-                        errorMessage.style.display = 'block';
-                        uploadBox.innerHTML = `<p>クリックして写真を追加 またはドラッグ&ドロップ</p>`;
-                    }
-                }
-            });
-            </script> -->
         </form>
     </div>
 </div>

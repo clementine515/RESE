@@ -5,18 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NewReview;
 use App\Models\Restaurant;
+use App\Http\Requests\CreateReviewRequest;
 
 
 class ReviewController extends Controller
 {
-    public function store(Request $request)
+    public function store(CreateReviewRequest $request)
     {
-        $request->validate([
-            'restaurant_id' => 'required|exists:restaurants,id',
-            'comment' => 'nullable|max:400',
-            'photo' => 'nullable|image|mimes:jpeg,png|max:2048',
-        ]);
-
+        $validated = $request->validated();
 
         $imagePath = null;
         if ($request->hasFile('photo')) {
