@@ -1,3 +1,7 @@
+## 採点担当者さまへ
+Pro入会テストに関する追記はREADME下部にまとめております。
+そちらのご参照をお願いいたします。
+
 # レストラン予約システムRESE
 このプロジェクトは「レストラン予約アプリ」です。
 ユーザーが飲食店を検索し、予約やお気に入り登録ができるシステムです。<br>
@@ -104,3 +108,13 @@ phpMyAdmin:：http://localhost:8080/<br>
 ログイン画面：http://localhost/login<br>
 新規会員登録画面：http://localhost/register<br>
 
+## Pro入会テスト追加実装機能
+口コミ機能、店舗一覧ソート機能、csvインポート機能
+
+＜csvファイル作成方法＞<br>
+1 スプレッドシートやExcelを使用<br>
+2 下記添付画像のように各項目入力<br>
+3 「ファイル」→「ダウンロード」→「カンマ区切り形式(.csv)」を選択しファイル保存<br>
+
+＜csvファイル例＞
+<img width="922" alt="csvファイルの作成例" src="https://github.com/user-attachments/assets/d04013c4-a32f-4b8b-b9e8-23c26fcc5fd3">
