@@ -63,12 +63,14 @@ class RestaurantController extends Controller
         if ($request->filled('sort_order')) {
             if ($request->sort_order === 'high_rating') {
                 $query->withCount(['reviews as star_sum' => function ($query) {
-                    $query->select(DB::raw('SUM(star)'));
+                    $query->select(DB::raw('COALESCE(SUM(star), 0)'));
                 }])->orderByDesc('star_sum');
             } elseif ($request->sort_order === 'low_rating') {
                 $query->withCount(['reviews as star_sum' => function ($query) {
-                    $query->select(DB::raw('SUM(star)'));
-                }])->orderBy('star_sum');
+                    $query->select(DB::raw('COALESCE(SUM(star), 0)'));
+                }])
+                ->orderBy(DB::raw('IF(star_sum = 0, 1, 0)'))
+                ->orderBy('star_sum');
             } elseif ($request->sort_order === 'random') {
                 $query->inRandomOrder();
             }
